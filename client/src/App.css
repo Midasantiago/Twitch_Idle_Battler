@@ -1,42 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+:root {
+  --border-color: #5386aa;
+  --card-header-color: #303559;
+  --card-body-color: #35577a;
+  --card-text-color: #cec4be;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: #3b3b3b;
+  color: var(--card-text-color);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.play-area {
+  width: 90%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.character {
+  width: 300px;
 }
 
-.card {
-  padding: 2em;
+.weapon-card {
+  background: var(--card-body-color);
+  border: 9px solid var(--border-color);
 }
 
-.read-the-docs {
-  color: #888;
+.weapon-card-header {
+  background-color: var(--card-header-color);
+}
+
+.weapon-list::-webkit-scrollbar {
+  display: none;
+}
+
+.weapon-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: 0 30px;
 }
