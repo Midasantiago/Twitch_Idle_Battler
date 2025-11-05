@@ -12,12 +12,19 @@ body {
   color: var(--card-text-color);
 }
 
-.play-area {
-  width: 90%;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-.character {
-  width: 300px;
+.text-outline {
+  -webkit-text-stroke: 0.05px black;
+}
+
+.play-area {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .weapon-card {
