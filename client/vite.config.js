@@ -6,9 +6,13 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   server: {
     port: 8080,
+    host: '0.0.0.0',
+    allowedHosts: ['paradisiacal-discretionally-hiram.ngrok-free.dev'],
+    cors: true,
   },
   plugins: [
     react(),
     tailwindcss()
   ],
+
 })

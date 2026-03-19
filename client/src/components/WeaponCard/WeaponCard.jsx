@@ -1,12 +1,11 @@
-import React from "react";
-import { rarityData, elementColors } from "../util/lootGen";
+import { rarityData, elementColors } from '../../util/lootGen';
 
 const WeaponCard = ({ selectedWeapon, handleWeaponSelect, className }) => {
 
     const rarityColor = rarityData[selectedWeapon.weaponRarity].color
 
     return (
-        <div onClick={handleWeaponSelect} className={`weapon-card relative flex-shrink-0 w-[220px] sm:w-[250px] md:w-[280px] h-56 rounded-xl text-center m-3 transition-transform duration-300 ${className}`}
+        <div onClick={handleWeaponSelect} className={`weapon-card relative flex-shrink-0 scale-60  md:scale-100 w-[220px] sm:w-[250px] md:h-[250px] md:w-[350px] h-56 rounded-xl text-center m-3 transition-transform duration-300 ${className}`}
             style={{ boxShadow: `0 0 15px ${rarityColor}`}}>
             <h1 className={`weapon-card-header font-bold text-3xl tracking-tighter p-1.5`}
                 style={{ color: rarityColor }}>
