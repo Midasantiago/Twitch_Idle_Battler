@@ -5,7 +5,7 @@ import Enemy from "../Enemy/Enemy";
 const PlayArea = ({ character, enemy_psycho, handleAttack, currentEnemy }) => {
 
     return (
-        <div className='play-area flex flex-row justify-between items-center gap-6 min-h-[50vh] md:min-h-[60vh] pb-[6.5rem] px-2'>
+        <div className='play-area flex justify-between items-center w-full gap-6'>
             <Character
                 character={character}
                 handleAttack={handleAttack}

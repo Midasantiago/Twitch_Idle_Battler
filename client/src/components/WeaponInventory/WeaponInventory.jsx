@@ -6,7 +6,7 @@ const WeaponInventory = ({ weaponList, currentWeapon, selectWeapon, cardVariants
     const handleSelect = (id) => selectWeapon(id);
 
     return (
-        <div className='weapon-list fixed bottom-20 left-0 right-0 flex gap-1 sm:gap-4 overflow-x-auto px-4 sm:px-6 md:px-10 h-40 md:h-100 items-center'>
+        <div className='weapon-list flex gap-4 px-4 overflow-x-auto h-full items-center'>
             <AnimatePresence initial={false}>
                 {weaponList.length ? (
                     weaponList.map((weapon, index) => {
@@ -31,7 +31,7 @@ const WeaponInventory = ({ weaponList, currentWeapon, selectWeapon, cardVariants
                                 <WeaponCard
                                     handleWeaponSelect={() => handleSelect(weapon.id)}
                                     selectedWeapon={weapon}
-                                    className={isSelected ? 'scale-120' : ''}
+                                    className={isSelected ? 'scale-80' : ''}
                                 />
                             </motion.div>
                         )

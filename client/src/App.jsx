@@ -47,17 +47,17 @@ function App() {
   };
 
   return (
-    <div className='min-h-screen max-w-[1200px] mx-auto px-4 pt-6'>
+    <div className='main min-h-screen flex flex-col max-w-5xl mx-auto px-4 py-4'>
 
       {/*Button to generate weapon for player */}
       {/* Will be changed to generate weapon under different circummstances, not the button */}
-      {/*<div className='flex justify-between items-center mb-4'>
+      <div className='flex justify-between items-center mb-4'>
         <button
           className='text-center px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 transition'
           onClick={addWeapon}>
           Generate Weapon
         </button>
-      </div>*/}
+      </div>
 
       {/* DPS Counter */}
       <p className='text-white font-bold'>
