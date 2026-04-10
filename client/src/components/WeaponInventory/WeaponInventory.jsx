@@ -6,7 +6,7 @@ const WeaponInventory = ({ weaponList, currentWeapon, selectWeapon, cardVariants
     const handleSelect = (id) => selectWeapon(id);
 
     return (
-        <div className='weapon-list flex gap-4 px-4 overflow-x-auto h-full items-center'>
+        <div className='grid grid-cols-2 gap-4'>
             <AnimatePresence initial={false}>
                 {weaponList.length ? (
                     weaponList.map((weapon, index) => {
@@ -27,17 +27,20 @@ const WeaponInventory = ({ weaponList, currentWeapon, selectWeapon, cardVariants
                                     stiffness: 300,
                                     damping: 20
                                 }}
+                                className='relative w-full overflow-visible'
                             >
-                                <WeaponCard
-                                    handleWeaponSelect={() => handleSelect(weapon.id)}
-                                    selectedWeapon={weapon}
-                                    className={isSelected ? 'scale-80' : ''}
-                                />
+                                <div className='w-full overflow-visible'>
+                                    <WeaponCard
+                                        handleWeaponSelect={() => handleSelect(weapon)}
+                                        selectedWeapon={weapon}
+                                        className={isSelected ? 'ring-2 ring-yellow-400' : ''}
+                                    />
+                                </div>
                             </motion.div>
                         )
                     })
                 ) : (
-                    <p className='text-center w-full'>No Weapons</p>
+                    <p className='text-center col-span-2'>No Weapons</p>
                 )}
             </AnimatePresence>
         </div>

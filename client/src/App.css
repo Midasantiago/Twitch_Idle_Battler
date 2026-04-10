@@ -13,7 +13,7 @@ body {
 }
 
 .main {
-  height: 500px;
+  
 }
 
 img {
@@ -26,14 +26,9 @@ img {
   -webkit-text-stroke: 0.05px black;
 }
 
-.play-area {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .weapon-card {
   background: var(--card-body-color);
-  border: 9px solid var(--border-color);
+  border: 2px solid var(--border-color);
 }
 
 .weapon-card-header {

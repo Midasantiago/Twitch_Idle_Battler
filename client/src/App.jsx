@@ -1,6 +1,8 @@
 import './App.css'
+import { useState } from 'react';
 import PlayArea from './components/PlayArea/PlayArea';
 import WeaponInventory from './components/WeaponInventory/WeaponInventory';
+import WeaponSlots from './components/WeaponInventoryV2/WeaponSlotsArea';
 import { useEnemy } from './hooks/useEnemy';
 import { useWeapons } from './hooks/useWeapons';
 import { useAutoAttack } from './hooks/useAutoAttack';
@@ -20,19 +22,29 @@ function App() {
   const { enemy, attackEnemy } = useEnemy();
 
   // Handles when the players issues an attack and does damage to the enemy
-  // Currently set to push button to attack
-  // Later on will make it so that the player attacks on an interval (depending on weapon fire rate)
-  const handleAttack = (e) => {
-
-    if (!currentWeapon) return;
-
-    attackEnemy(currentWeapon?.weaponDamage);
-  }
 
   useAutoAttack({
     currentWeapon: currentWeapon || null,
     attackEnemy
   });
+
+  // Opens/Closes Player Inventory
+  const [showEquipmentModal, setShowEquipmentModal] = useState(false);
+
+  const openEquipmentModal = () => {
+    setShowEquipmentModal(true)
+    console.log('Opened Modal');
+  };
+
+  const closeEquipmentModal = () => {
+    setShowEquipmentModal(false)
+  };
+
+  const handleWeaponSelect = (weapon) => {
+    selectWeapon(weapon.id)
+    console.log(currentWeapon)
+    closeEquipmentModal()
+  }
 
   // DPS Counter Test
   const dps = currentWeapon
@@ -47,7 +59,7 @@ function App() {
   };
 
   return (
-    <div className='main min-h-screen flex flex-col max-w-5xl mx-auto px-4 py-4'>
+    <div className='main min-h-screen flex flex-col items-center justify-start max-w-5xl mx-auto px-4 py-4'>
 
       {/*Button to generate weapon for player */}
       {/* Will be changed to generate weapon under different circummstances, not the button */}
@@ -68,18 +80,44 @@ function App() {
       <PlayArea
         character={character}
         enemy_psycho={enemy_psycho}
-        handleAttack={handleAttack}
         currentEnemy={enemy}
       />
       {/* End of Playable Area */}
 
       {/* Contains the weapon inventory bar placed at the bottom of the screen */}
-      <WeaponInventory
-        weaponList={weaponList}
+      <WeaponSlots
+        invToggle={openEquipmentModal}
         currentWeapon={currentWeapon}
-        selectWeapon={selectWeapon}
       />
       {/* End of Weapon Inventory */}
+
+      {/*Inventory Modal */}
+      {showEquipmentModal && (
+
+        <div className='fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm'
+          onClick={closeEquipmentModal}>
+
+          <div className='bg-gray-900 rounded-xl py-4 max-w-4xl w-full border max-h-[80vh] border-blue-200 relative flex flex-col'
+            onClick={(e) => e.stopPropagation}>
+
+            <button
+              onClick={closeEquipmentModal}
+              className='absolute top-2 right-2 text-white text-xl hover:text-red-400'
+            >
+              X
+            </button>
+
+            <div className='flex-1 overflow-y-auto weapon-list pb-4 px-1'>
+              <WeaponInventory
+                weaponList={weaponList}
+                selectWeapon={handleWeaponSelect}
+                cardVariants={cardVariants}
+              />
+            </div>
+          </div>
+
+        </div>
+      )}
 
     </div>
   )
