@@ -6,36 +6,41 @@ const WeaponCard = ({ selectedWeapon, handleWeaponSelect, className }) => {
 
     return (
         <div onClick={handleWeaponSelect}
-            className={`weapon-card cursor-pointer flex-shrink-0 scale-60 md:scale-100 w-[220px] sm:w-[250px] md:h-[250px] md:w-[350px] h-56 rounded-xl text-center m-3 transition-transform duration-300 ${className}`}
-            style={{ boxShadow: `0 0 15px ${rarityColor}` }}>
+            className={`weapon-card cursor-pointer w-full h-full flex flex-col flex-shrink-0 justify-between rounded-xl transition-transform duration-300 hover:scale-105 ${className}`}
+            style={{ boxShadow: `0 0 10px ${rarityColor}` }}>
 
-            <h1 className={`weapon-card-header font-bold text-3xl tracking-tighter p-1.5`}
-                style={{ color: rarityColor }}>
-                {selectedWeapon.weaponName}
-            </h1>
+            {/* Header */}
+            <div className="weapon-card-header flex-[1] flex items-center justify-center p-[clamp(4px,1vw,10px)]">
+                <h2 className={`font-bold text-outline text-[clamp(0.7rem,2vw,1.2rem)] text-center truncate`}
+                    style={{ color: rarityColor }}>
+                    {selectedWeapon.weaponName}
+                </h2>
+            </div>
 
-            <div className='h-full text-xl p-1'>
+            {/* Stats */}
+            <div className='flex-[2] flex flex-col justify-center gap-[clamp(2px,0.8vw,6px)] px-[clamp(4px,1vw,10px)] text-[clamp(0.6rem,1.8vw,1rem)]'>
 
                 <div className='flex justify-between text-outline'>
-                    <h2 className='pl-4'>Damage</h2>
-                    <h2 className='pr-4'>{selectedWeapon.weaponDamage}</h2>
+                    <span>Damage</span>
+                    <span className="whitespace-nowrap">{selectedWeapon.weaponDamage}</span>
                 </div>
 
                 <div className='flex justify-between text-outline'>
-                    <h2 className='pl-4'>Fire Rate</h2>
-                    <h2 className='pr-4'>{selectedWeapon.fireRate}</h2>
+                    <span>Fire Rate</span>
+                    <span className="whitespace-nowrap">{selectedWeapon.fireRate}</span>
                 </div>
 
                 <div className='flex justify-between text-outline'>
-                    <h2 className='pl-4'>Element</h2>
-                    <h2 className='pr-4 font-bold' style={{ color: elementColors[selectedWeapon.element] }}>{selectedWeapon.element}</h2>
+                    <span>Element</span>
+                    <span className="truncate text-right" style={{ color: elementColors[selectedWeapon.element] }}>{selectedWeapon.element}</span>
                 </div>
 
             </div>
 
-            <div className='weapon-card-header weapon-card-bottom flex justify-between absolute bottom-0 w-full text-3xl overflow-hidden p-1.5'>
-                <h1 className='pl-3' style={{ color: rarityColor }}>{selectedWeapon.manufacturer}</h1>
-                <h2 className='pr-3 font-bold' style={{ color: rarityColor }}>{selectedWeapon.weaponType}</h2>
+            {/* Footer */}
+            <div className='weapon-card-header weapon-card-bottom flex-[1] flex justify-between items-center p-[clamp(4px,1vw,10px)] text-[clamp(0.6rem,1.8vw,1rem)]'>
+                <span className="font-bold text-outline truncate" style={{ color: rarityColor }}>{selectedWeapon.manufacturer}</span>
+                <span className='font-bold text-outline truncate' style={{ color: rarityColor }}>{selectedWeapon.weaponType}</span>
             </div>
 
         </div>
