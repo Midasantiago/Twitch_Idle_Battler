@@ -1,7 +1,8 @@
 import './App.css'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PlayArea from './components/PlayArea/PlayArea';
 import WeaponInventory from './components/WeaponInventory/WeaponInventory';
+import WeaponSwap from './components/WeaponInventoryV2/WeaponSwap';
 import WeaponSlots from './components/WeaponInventoryV2/WeaponSlotsArea';
 import { useEnemy } from './hooks/useEnemy';
 import { useWeapons } from './hooks/useWeapons';
@@ -13,36 +14,44 @@ function App() {
 
   const {
     weaponList,
+    setWeaponList,
     currentWeapon,
+    equippedWeapons,
+    activeWeapon,
+    setActiveWeapon,
     addWeapon,
     selectWeapon
   } = useWeapons();
 
   // Contains the current enemy's data
-  const { enemy, attackEnemy } = useEnemy();
+  const { enemy, attackEnemy, isDying } = useEnemy({ addWeapon });
 
   // Handles when the players issues an attack and does damage to the enemy
 
   useAutoAttack({
     currentWeapon: currentWeapon || null,
-    attackEnemy
+    attackEnemy,
+    isDying: isDying
   });
 
   // Opens/Closes Player Inventory
   const [showEquipmentModal, setShowEquipmentModal] = useState(false);
+  const [modalSlot, setModalSlot] = useState(null);
 
-  const openEquipmentModal = () => {
+  const openEquipmentModal = (slot) => {
+    setModalSlot(slot);
     setShowEquipmentModal(true)
     console.log('Opened Modal');
   };
 
   const closeEquipmentModal = () => {
+    setModalSlot(null);
     setShowEquipmentModal(false)
+    console.log('Closed Modal');
   };
 
   const handleWeaponSelect = (weapon) => {
-    selectWeapon(weapon.id)
-    console.log(currentWeapon)
+    selectWeapon(weapon.id, modalSlot)
     closeEquipmentModal()
   }
 
@@ -58,18 +67,28 @@ function App() {
     exit: { opacity: 0, y: -10, scale: 0.95 }
   };
 
+  // Defines and gives the player their first weapon upon start
+  const firstWeapon = {
+    id: crypto.randomUUID(),
+    weaponName: 'Basic Repeater',
+    weaponType: 'Pistol',
+    weaponRarity: 'Common',
+    weaponDamage: 10,
+    fireRate: 3,
+    manufacturer: 'DAHL',
+    element: 'None'
+  }
+
+  const calledOnce = useRef(false);
+  useEffect(() => {
+    if (!calledOnce.current) {
+      setWeaponList(prev => [firstWeapon, ...prev]);
+      calledOnce.current = true;
+    }
+  }, [])
+
   return (
     <div className='main min-h-screen flex flex-col items-center justify-start max-w-5xl mx-auto px-4 py-4'>
-
-      {/*Button to generate weapon for player */}
-      {/* Will be changed to generate weapon under different circummstances, not the button */}
-      <div className='flex justify-between items-center mb-4'>
-        <button
-          className='text-center px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 transition'
-          onClick={addWeapon}>
-          Generate Weapon
-        </button>
-      </div>
 
       {/* DPS Counter */}
       <p className='text-white font-bold'>
@@ -81,13 +100,19 @@ function App() {
         character={character}
         enemy_psycho={enemy_psycho}
         currentEnemy={enemy}
+        isDying={isDying}
       />
       {/* End of Playable Area */}
 
       {/* Contains the weapon inventory bar placed at the bottom of the screen */}
+      <WeaponSwap
+        setActiveWeapon={setActiveWeapon}
+        equippedWeapons={equippedWeapons}
+      />
       <WeaponSlots
         invToggle={openEquipmentModal}
-        currentWeapon={currentWeapon}
+        equippedWeapons={equippedWeapons}
+        activeWeapon={activeWeapon}
       />
       {/* End of Weapon Inventory */}
 

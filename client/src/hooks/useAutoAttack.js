@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function useAutoAttack({ currentWeapon, attackEnemy }) {
+export function useAutoAttack({ currentWeapon, attackEnemy, isDying }) {
 
     const attackRef = useRef(attackEnemy);
 
@@ -11,8 +11,8 @@ export function useAutoAttack({ currentWeapon, attackEnemy }) {
 
     useEffect(() => {
 
-        // No weapon = no attacking
-        if (!currentWeapon) return;
+        // No weapon/enemy dying = no attacking
+        if (!currentWeapon || isDying) return;
 
         const interval = setInterval(() => {
             attackRef.current(currentWeapon.weaponDamage);

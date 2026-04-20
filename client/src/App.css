@@ -12,10 +12,6 @@ body {
   color: var(--card-text-color);
 }
 
-.main {
-  
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -43,4 +39,13 @@ img {
   -ms-overflow-style: none;
   scrollbar-width: none;
   margin: 0 30px;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: brightness(1); transform: scale(1); }
+  50% { opacity: 0; filter: brightness(3); transform: scale(0.95); }
+}
+
+.flicker {
+  animation: flicker 0.3s ease-in-out 3;
 }

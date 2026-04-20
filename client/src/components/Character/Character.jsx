@@ -1,6 +1,6 @@
 import React from "react";
 
-const Character = ({ character, handleAttack }) => {
+const Character = ({ character }) => {
 
     return (
         <div className='character flex-col justify-center text-center items-center flex-1'>
