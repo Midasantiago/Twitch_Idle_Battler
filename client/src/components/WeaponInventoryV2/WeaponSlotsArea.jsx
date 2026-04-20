@@ -1,4 +1,4 @@
-import WeaponCardMini from "../WeaponCard/weaponCardMini";
+import WeaponCardMini from "../WeaponCard/WeaponCardMini";
 
 const WeaponSlots = ({ invToggle, equippedWeapons, activeWeapon }) => {
 
