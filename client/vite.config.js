@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 8080,
     host: '0.0.0.0',
-    allowedHosts: ['paradisiacal-discretionally-hiram.ngrok-free.dev'],
+    allowedHosts: ['paradisiacal-discretionally-hiram.ngrok-free.dev', 'https://twitch-idle-battler.onrender.com'],
     cors: true,
   },
   plugins: [
