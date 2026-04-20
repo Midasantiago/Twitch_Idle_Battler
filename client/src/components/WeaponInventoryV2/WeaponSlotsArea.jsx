@@ -1,33 +1,33 @@
-import WeaponCard from "../WeaponCard/WeaponCard";
 import WeaponCardMini from "../WeaponCard/weaponCardMini";
 
-const WeaponSlots = ({ invToggle, currentWeapon }) => {
+const WeaponSlots = ({ invToggle, equippedWeapons, activeWeapon }) => {
+
+    const openSlot = (id) => invToggle(id);
 
     return (
         <div className="grid grid-cols-2 gap-3 mt-3 h-[189px]">
 
-            <button className="cursor-pointer w-full aspect-[3/2] flex items-center justify-center"
-                onClick={invToggle}>
-                {currentWeapon ? (
-                        <WeaponCardMini
-                            selectedWeapon={currentWeapon}
-                        />
+            <button className={`cursor-pointer w-full aspect-[3/2] flex items-center justify-center ${activeWeapon == 'slot1' ? 'ring-4' : ''}`}
+                onClick={() => openSlot('slot1')}>
+                {equippedWeapons.slot1 ? (
+                    <WeaponCardMini
+                        selectedWeapon={equippedWeapons.slot1}
+                    />
                 ) : (
                     <div className="w-full aspect-[3/2] flex items-center justify-center border-2 rounded-lg">Empty</div>
                 )}
             </button>
 
-            <div className="w-full aspect-[3/2] flex border-2 text-center items-center rounded-lg">
-                <p>Weapon Slot 2</p>
-            </div>
-
-            <div className="w-full aspect-[3/2] flex border-2 text-center items-center rounded-lg">
-                <p>Weapon Slot 3</p>
-            </div>
-
-            <div className="w-full aspect-[3/2] flex border-2 text-center items-center rounded-lg">
-                <p>Weapon Slot 4</p>
-            </div>
+            <button className={`cursor-pointer w-full aspect-[3/2] flex items-center justify-center ${activeWeapon == 'slot2' ? 'ring-4' : ''}`}
+                onClick={() => openSlot('slot2')}>
+                {equippedWeapons.slot2 ? (
+                    <WeaponCardMini
+                        selectedWeapon={equippedWeapons.slot2}
+                    />
+                ) : (
+                    <div className="w-full aspect-[3/2] flex items-center justify-center border-2 rounded-lg">Empty</div>
+                )}
+            </button>
 
         </div>
     )
